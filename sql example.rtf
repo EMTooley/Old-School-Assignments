@@ -1,0 +1,49 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2578
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs28 \cf2 \expnd0\expndtw0\kerning0
+.separator :
+\fs24 \
+
+\fs28 create table People(name string, age integer, bday string);
+\fs24 \
+
+\fs28 create table Drinks(name string, coffee string);
+\fs24 \
+
+\fs28 create table Visits(name string, shop string);
+\fs24 \
+
+\fs28 create table Serves(shop string, coffee string, price real);
+\fs24 \
+
+\fs28 .import /u1/class/cs61703/oct06/People.txt People
+\fs24 \
+
+\fs28 .import /u1/class/cs61703/oct06/Drinks.txt Drinks
+\fs24 \
+
+\fs28 .import /u1/class/cs61703/oct06/Visits.txt Visits
+\fs24 \
+
+\fs28 .import /u1/class/cs61703/oct06/Serves.txt Serves
+\fs24 \
+select count(distinct name) from Drinks where coffee = 'folgers\'92; \
+select shop, price from Serves where coffee = 'folgers' order by price desc; \
+select max(coffee) from Serves; \
+select shop from Serves where coffee = (select coffee from Drinks where name = 'bob smith\'92); \
+select distinct name from Drinks where coffee = 'folgers' and name in (select name from People where age >= 20 and age <30); \
+select distinct name from Drinks where coffee <> 'mocha' and name in (select name from Visits where shop = 'bean and gone\'92); \
+select name from Visits where shop = 'bean and gone' and name not in (select name from Drinks where coffee in (select coffee from Serves where shop = 'bean and gone')); \
+select shop from Visits group by name order by name desc limit 1; \
+select name from Drinks where coffee = 'kona' and name in (select name from People where age < 30) and name in (select name from Visits where shop i \
+n (select shop from Serves where coffee = 'kona')); \
+select count(name) from Visits where name in (select name from Visits where shop = 'the coffee grinder') and name in (select name from Visits where shop = 'bean and gone'); \
+select count(name) from Visits where name not in (select name from Visits where shop = 'the coffee grinder') and name not in (select name from Visits where shop = 'bean and gone\'92); \
+select shop from Visits where shop in (select shop from Visits where name = 'Joseph Whitehead') and shop in (select shop from Visits where name = 'Beatris Shepard'); \
+}
